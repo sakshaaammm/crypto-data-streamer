@@ -14,7 +14,7 @@ export const StatCard = ({ title, value, subtitle, isPositive }: StatCardProps) 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white/80 backdrop-blur-lg rounded-xl p-6 shadow-sm border border-gray-100"
+      className="bg-white/80 backdrop-blur-lg rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
     >
       <h3 className="text-sm font-medium text-gray-500">{title}</h3>
       <div className="mt-2 flex items-baseline">

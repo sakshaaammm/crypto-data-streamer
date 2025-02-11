@@ -31,12 +31,13 @@ const calculateStats = (data: CryptoData[]): CryptoStats => {
 };
 
 const Index = () => {
-  const [refreshInterval, setRefreshInterval] = useState(300000); // 5 minutes
+  const [refreshInterval, setRefreshInterval] = useState(30000); // Update every 30 seconds for more live feel
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['cryptos'],
     queryFn: fetchTop50Cryptos,
     refetchInterval: refreshInterval,
+    refetchIntervalInBackground: true, // Continue fetching even when tab is in background
   });
 
   const stats = data ? calculateStats(data) : null;
