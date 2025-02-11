@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -46,11 +45,12 @@
     @apply bg-background text-foreground antialiased;
     background: linear-gradient(
       135deg,
-      rgba(255, 255, 255, 0.8) 0%,
-      rgba(240, 242, 255, 0.9) 50%,
-      rgba(230, 235, 255, 1) 100%
+      #1A1F2C 0%,
+      #6E59A5 50%,
+      #9b87f5 100%
     );
     background-attachment: fixed;
+    color: #ffffff;
   }
 
   /* Custom Scrollbar */
@@ -75,13 +75,13 @@
   }
 }
 
-/* Enhanced Glass Morphism */
+/* Enhanced Glass Morphism for Dark Theme */
 .glass {
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(110, 89, 165, 0.1);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+  border: 1px solid rgba(155, 135, 245, 0.2);
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
 }
 
 /* Card Hover Effects */
@@ -151,8 +151,9 @@
 }
 
 .crypto-table th {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(26, 31, 44, 0.8);
   backdrop-filter: blur(8px);
+  color: #ffffff;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -163,7 +164,7 @@
 }
 
 .crypto-table tr:hover {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(110, 89, 165, 0.2);
   transform: scale(1.01);
 }
 

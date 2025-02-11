@@ -36,9 +36,14 @@ const calculateStats = (data: CryptoData[]) => {
 
 export const exportToCSV = (data: CryptoData[]) => {
   const stats = calculateStats(data);
+  const timestamp = new Date();
   
   // Define sections for CSV
   const statsSection = [
+    ['Cryptocurrency Market Analysis Report', ''],
+    ['Generated on:', timestamp.toLocaleString()],
+    ['Time Zone:', Intl.DateTimeFormat().resolvedOptions().timeZone],
+    [''],
     ['Statistical Analysis', ''],
     ['Average Price (USD)', stats.averagePrice.toFixed(2)],
     ['Highest 24h Change', `${stats.highestPriceChange.name} (${stats.highestPriceChange.change.toFixed(2)}%)`],
@@ -53,6 +58,8 @@ export const exportToCSV = (data: CryptoData[]) => {
     ]),
     [''],
     ['Complete Dataset', ''],
+    ['Data Timestamp:', timestamp.toISOString()],
+    ['']
   ];
 
   // Define headers for main data
@@ -89,7 +96,7 @@ export const exportToCSV = (data: CryptoData[]) => {
   const link = document.createElement('a');
   const url = URL.createObjectURL(blob);
   link.setAttribute('href', url);
-  link.setAttribute('download', `crypto_analysis_${new Date().toISOString()}.csv`);
+  link.setAttribute('download', `crypto_analysis_${timestamp.toISOString()}.csv`);
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
