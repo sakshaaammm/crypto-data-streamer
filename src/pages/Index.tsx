@@ -6,6 +6,10 @@ import { StatCard } from '../components/StatCard';
 import { CryptoData, CryptoStats } from '../types/crypto';
 import { motion } from 'framer-motion';
 import { useEffect, useState } from 'react';
+import { exportToCSV } from '../utils/exportUtils';
+import { Button } from "@/components/ui/button";
+import { FileDown } from 'lucide-react';
+import { useToast } from "@/components/ui/use-toast";
 
 const calculateStats = (data: CryptoData[]): CryptoStats => {
   const averagePrice = data.reduce((acc, curr) => acc + curr.current_price, 0) / data.length;
@@ -31,14 +35,25 @@ const calculateStats = (data: CryptoData[]): CryptoStats => {
 };
 
 const Index = () => {
-  const [refreshInterval, setRefreshInterval] = useState(30000); // Update every 30 seconds for more live feel
+  const [refreshInterval, setRefreshInterval] = useState(30000);
+  const { toast } = useToast();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['cryptos'],
     queryFn: fetchTop50Cryptos,
     refetchInterval: refreshInterval,
-    refetchIntervalInBackground: true, // Continue fetching even when tab is in background
+    refetchIntervalInBackground: true,
   });
+
+  const handleExport = () => {
+    if (data) {
+      exportToCSV(data);
+      toast({
+        title: "Export Successful",
+        description: "The CSV file has been downloaded. You can open it in Excel.",
+      });
+    }
+  };
 
   const stats = data ? calculateStats(data) : null;
   const top5 = data?.slice(0, 5) || [];
@@ -64,10 +79,17 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-lg text-gray-600"
+            className="text-lg text-gray-600 mb-6"
           >
             Real-time analysis of the top 50 cryptocurrencies
           </motion.p>
+          <Button
+            onClick={handleExport}
+            className="bg-blue-600 hover:bg-blue-700 text-white"
+          >
+            <FileDown className="mr-2 h-4 w-4" />
+            Export to Excel
+          </Button>
         </div>
 
         {isLoading ? (
